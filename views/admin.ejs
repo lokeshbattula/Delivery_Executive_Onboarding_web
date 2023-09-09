@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Document</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <h3>Lokesh Delivery</h3>
+                <!-- <img src="logo.png" alt="Logo"> -->
+            </div>
+            <nav>
+                <ul class="menu">
+                    <li>
+                        <div class="back">
+                        <button class="backbtn"><a href="/logout">Logout</a></button>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+            <!-- <nav>
+                <ul class="menu">
+                    <li>
+                    <div class="dropdown">
+                        <button class="dropbtn">STATUS</button>
+                        <div class="dropdown-content">
+                            
+                            <a href="#">Pending</a>
+                            <a href="#">Approved</a>
+                            <a href="#">Rejected</a>
+                            <a href="">Not registered</a>
+                            <a href="">ALL</a>
+                        </div>
+                    </div>
+                    </li>
+                </ul>
+            </nav> -->
+        </div>
+    </header>
+    <div class="admin">
+        <div>
+           <h1>Admin Page</h1>
+        </div>
+        <div class="filter">
+            <div>
+           <h2>Filter Basis: </h2>
+            </div>
+            <div>
+           <nav>
+                <ul class="menu">
+                    <li>
+                    <div class="dropdown">
+                        <button class="dropbtn">STATUS<i class="fa fa-filter" style="font-size:19px"></i></button>
+                        <div class="dropdown-content">
+                            
+                            <a href="/admin?status=Pending">Pending</a>
+                            <a href="/admin?status=Approved">Approved</a>
+                            <a href="/admin?status=Rejected">Rejected</a>
+                            <a href="/admin?status=Not Registered">Not registered</a>
+                            <a href="/admin">ALL</a>
+                        </div>
+                    </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        </div>
+    </div>
+    <Div class="table">
+        <table>
+            <tr>
+                <th>Registered Time</th>
+                <th>Phone Number </th>
+                <th>Name </th>
+                <th>Email</th>
+                <th>status</th>
+
+            </tr>
+            <!-- statusFilter -->
+
+            <% const len=userdata.length %>
+                <% for(let i=0;i<len;i++){ %>
+                   <%# if (statusFilter==userdata[i].status) {%>
+                        <tr>
+                            <td>
+                                <%= userdata[i].registeredtime %>
+                            </td>
+                            <td>
+                                <% const userphone = userdata[i].phone %>
+                                <% const temp = true %>
+                                <div >
+                                <a href="/register?userphone=<%= userphone %>&&admin=<%= temp %>"><%= userdata[i].phone %></a>
+                                </div>
+                                
+                            </td>
+                            <td>
+                                <%= userdata[i].fullname %>
+                            </td>
+                            <td>
+                                <%= userdata[i].email %>
+                            </td>
+                            <td>
+                                <%= userdata[i].status %>
+                            </td>
+                        </tr>
+                        <%# } %>
+
+                    <% } %>
+        </table>
+    </Div>
+    
+
+</body>
+
+</html>

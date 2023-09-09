@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/register.css">
+</head>
+
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <h3>Lokesh Delivery</h3>
+                <!-- <img src="logo.png" alt="Logo"> -->
+            </div>
+            <nav>
+                <ul class="menu">
+                    <li>
+                        
+                        <% if(admin){ %>
+                        <div class="back">
+                        <button class="backbtn"><a href="/admin">Back to admin</a></button>
+                        </div>
+                        <% } else { %>
+                        <div class="back">
+                        <button class="backbtn"><a href="/logout">Logout</a></button>
+                        </div>
+                        <% } %>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <% if(!registered){ %>
+        <h2>REGISTRATION FORM</h2>
+
+
+        <table align="center" cellpadding="10">
+            <form action="/register" method="post" enctype="multipart/form-data">
+                <tr>
+                    <td>
+                        <h3>PERSONAL DETAILS</h3>
+                    </td>
+                </tr>
+
+                <!----- First Name ---------------------------------------------------------->
+                <tr>
+                    <td>FULL NAME</td>
+                    <td><input type="text" id ="birthdate" name="fullname" maxlength="30" required />
+                        (max 30 characters a-z and A-Z)
+                    </td>
+                </tr>
+
+                <!----- Last Name ---------------------------------------------------------->
+                <!-- <tr>
+<td>LAST NAME</td>
+<td><input type="text" name="Last_Name" maxlength="30"/>
+(max 30 characters a-z and A-Z)
+</td>
+</tr> -->
+
+                <!----- Date Of Birth -------------------------------------------------------->
+                <tr>
+                    <td>DATE OF BIRTH</td>
+
+                    <td><input type="date" name="dob" required></td>
+
+                    <!----- Email Id ---------------------------------------------------------->
+                <tr>
+                    <td>EMAIL ID</td>
+                    <td><input type="email" name="email" maxlength="30" placeholder="Email ID" required></td>
+                </tr>
+
+                <!----- Mobile Number ---------------------------------------------------------->
+                <!-- <tr>
+<td>MOBILE NUMBER</td>
+<td>
+<input type="text" name="phone" maxlength="10" />
+(10 digit number)
+</td>
+</tr> -->
+
+                <!----- Gender ----------------------------------------------------------->
+                <!-- <tr>
+<td>GENDER</td>
+<td>
+Male <input type="radio" name="Gender" value="Male" />
+Female <input type="radio" name="Gender" value="Female" />
+</td>
+</tr> -->
+
+                <!----- Address ---------------------------------------------------------->
+                <tr>
+                    <td>ADDRESS <br /><br /><br /></td>
+                    <td><textarea name="address" rows="4" cols="30" required></textarea></td>
+                </tr>
+
+                <!----- City ---------------------------------------------------------->
+                <!-- <tr>
+<td>CITY</td>
+<td><input type="text" name="City" maxlength="30" />
+(max 30 characters a-z and A-Z)
+</td>
+</tr> -->
+
+                <!----- Pin Code ---------------------------------------------------------->
+                <tr>
+                    <td>PIN CODE</td>
+                    <td><input type="text" name="pincode" maxlength="6" minlength="6" placeholder="Pin Code" required />
+                        (6 digit number)
+                    </td>
+                </tr>
+                <!----- Bank Details ---------------------------------------------------------->
+
+                <tr>
+                    <td>
+                        <h3>BANK DETAILS</h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td>ACCOUNT NUMBER</td>
+                    <td><input type="text" name="accnum" maxlength="18" minlength="5" placeholder="Account Number" required/></td>
+                    <td>UPLOAD PASSBOOK(*img)</td>
+                    <td><input type="file" placeholder="passbook" name="img"></td>
+                </tr>
+                <tr>
+                    <td>BANK NAME</td>
+                    <td><input type="text" name="bankname" placeholder="Bank Name" required></td>
+                </tr>
+                <tr>
+                    <td>BRANCH NAME</td>
+                    <td><input type="text" name="branchname" placeholder="Branch Name" required></td>
+                </tr>
+                <tr>
+                    <td>IFSC CODE</td>
+                    <td><input type="text" name="ifsc" placeholder="IFSC Code" maxlength="11" minlength="11" required/>
+                    </td>
+                </tr>
+
+                <!----- OTHER Details ---------------------------------------------------------->
+                <tr>
+                    <td>
+                        <h3>OTHER DETAILS</h3>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>DRIVING LICIENSE</td>
+                    <td><input type="text" name="dl" placeholder="DL Number" maxlength="16" required></td>
+                    <td>RC FILE</td>
+                    <td><input type="file" name="img" placeholder="Upload RC"></td>
+                </tr>
+                <tr>
+                    <td>BIKE NUMBER</td>
+                    <td><input type="text" name="bikenum" placeholder="Bike Number" required></td>
+                </tr>
+                <tr>
+                    <td>PAN CARD NUMBER</td>
+                    <td><input type="text" name="pannum" placeholder="Pan Card Number" maxlength="10" minlength="10" required/></td>
+                    <td>UPLOAD PAN CARD</td>
+                    <td><input type="file" name="img" placeholder="Upload Pan Card"></td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <button type="submit" class="regbtn">SUBMIT FORM</button>
+                        <!-- <input type="reset" value="Reset"> -->
+                    </td>
+                </tr>
+            </form>
+        </table>
+
+
+
+        <% } else { %>
+            <h2>Welcome <%= fullname %>
+            </h2>
+            <table align="center">
+                <tr>
+                    <td class="h">
+                        <h1>Personal Details</h1>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="d">
+                        <h3>Full Name : <%= fullname %>
+                        </h3>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="d">
+                        <h3>Date of Birth : <%= dob %>
+                        </h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="d">
+                        <h3>Address : <%= address %>
+                        </h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="d">
+                        <h3>Pincode : <%= pincode %>
+                        </h3>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td class="h">
+                        <h1>Bank Details</h1>
+                    </td>
+                </tr>
+
+                <tr>
+
+                    <td class="d">
+                        <h3>Account Number : <%= accnum %>
+                        </h3>
+                        <h3>Passbook</h3>
+                        <img src="data:<%= all_images[0].contentType %>;base64,<%= all_images[0].imageBase64%>" alt="Passbook Image Display">
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="d">
+                        <h3>Bank Name : <%= bankname %>
+                        </h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="d">
+                        <h3>Branch Name : <%= branchname %>
+                        </h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="d">
+                        <h3>IFSC Code : <%= ifsc %>
+                        </h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="h">
+                        <h1>Other Details</h1>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="d">
+                        <h3>Driving License : <%= dl %>
+                        </h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="d">
+                        <h3>Bike Number : <%= bikenum %>
+                        </h3>
+                        <h3>rcfile</h3>
+                        <img src="data:<%= all_images[1].contentType %>;base64,<%= all_images[1].imageBase64%>" alt="RC Image Display">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="d">
+                        <h3>Pan Card Number : <%= pannum %>
+                        </h3>
+                        <h3>Pan Card </h3>
+                        <img src="data:<%= all_images[2].contentType %>;base64,<%= all_images[2].imageBase64%>" alt="Pan CardImage Display">
+                    </td>
+                </tr>
+                <tr>
+                    <div>
+                        <h2>Status : <%= status %></h2>
+                    </div>
+                </tr>
+                <tr>
+                    <% if(admin){ %>>
+                        <td>
+                            <div class="statusbtn">
+                                    <button class="backbtn"><a href="/register?admin=<%= admin %>&&status=Approved&&userphone=<%= userphone %>">APPROVE</a></button>
+                                    <button class="backbtn"><a href="/register?admin=<%= admin %>&&status=Rejected&&userphone=<%= userphone %>">REJECT</a></button>
+                            </div>
+                        </td>
+                </tr>
+
+            </table>
+            
+
+            <% } %>
+        <% } %>
+
+           
+
+
+</body>
+
+</html>

@@ -1,0 +1,187 @@
+/* .button {
+    padding: 15px 25px;
+    font-size: 24px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #de4f0c;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #a08d8d;
+  }
+  
+  .button:hover {background-color: #c98a0b}
+  
+  .button:active {
+    background-color: #e9450a;
+    box-shadow: 0 5px #95a1aa;
+    transform: translateY(4px);
+  } */
+
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+  }
+  
+  th, td {
+    text-align: left;
+    padding: 16px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+
+  body, ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Header styles */
+
+header {
+    background-color: #5a5959; /* Background color for the header */
+    color: white; /* Text color for the header */
+    padding: 10px 0;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.logo img {
+    max-height: 50px; /* Adjust the height of the logo */
+    vertical-align: middle;
+}
+
+nav ul.menu {
+    display: flex;
+    gap: 20px;
+}
+
+nav ul.menu li {
+    font-size: 16px; /* Adjust the font size for the menu items */
+}
+
+nav ul.menu li a {
+    text-decoration: none;
+    /* color: white; */
+    color: black;
+    transition: color 0.3s ease;
+}
+
+nav ul.menu li a:hover {
+    color:  white; /* Color for the menu items on hover */
+    /* background-color: white; */
+}
+/* nav ul.menu li:hover{
+
+} */
+
+.dropbtn {
+    background-color:  #5a5959;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #5a5959;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px white;
+    z-index: 1;
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    color: rgb(255, 255, 255);
+    
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {
+    background-color: white;
+}
+  
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {
+    display: block;
+    
+  }
+  
+  
+  /* Change the background color of the dropdown button when the dropdown content is shown */
+  .dropdown:hover .dropbtn {
+    background-color:  white;
+    color: black;
+  }
+
+
+  /* styling Admin */
+
+  .admin {
+    justify-content: space-around;
+    display: flex;
+    align-items: center;
+  }
+
+  .filter {
+    display :flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  
+  .backbtn {
+    background-color: white;
+    border: none;
+    color: black;
+    padding: 10px 32px;
+    text-align: center;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition: 0.3s;
+    cursor: pointer;
+  }
+  
+  .backbtn:hover {
+    background-color: #5a5959;
+    color: white;
+  }
+  
+  /* a{
+    text-decoration: none;
+  } */
+  
+  .backbtn:hover a{
+    color: white;
+  }
+  
+  .backbtn a{
+    color: white;
+  }
+  

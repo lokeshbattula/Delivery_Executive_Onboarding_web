@@ -1,0 +1,175 @@
+body{
+  background-color: #b7b7c3;
+  font-family: Arial, sans-serif;
+}
+
+h2{
+     
+    font-size: 25pt;         
+    font-style: normal; 
+    font-weight: bold; 
+    color:SlateBlue;
+    text-align: center; 
+    text-decoration: underline
+  }
+  
+  
+  .regbtn {
+    display: block;
+    width: 100%;
+    border: none;
+    background-color: #5a5959;
+    color: white; /* Button text color */
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 5px; /* Rounded corners for the button */
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+  }
+
+
+  .regbtn:hover {
+    background-color: #333; /* Button background color on hover */
+  }
+
+
+table {
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    border-collapse: collapse;
+    background-color: white; /* Table background color */
+}
+
+th, td {
+    padding: 10px;
+    
+    text-align: left;
+}
+
+
+
+td {
+    border-bottom: 1px solid #ddd  ;
+}
+
+h1, h3 {
+    margin: 0;
+}
+
+.h{
+  background-color: gray;
+}
+
+.d{
+  background-color: white;
+}
+
+td h1 {
+    font-size: 24px;
+    
+    
+}
+
+td h3 {
+    font-size: 18px;
+    
+}
+
+body, ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+header {
+  background-color: #5a5959; /* Background color for the header */
+  color: #fff; /* Text color for the header */
+  padding: 10px 0;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 200px;
+  margin-top: 30px;
+}
+
+.logo img {
+  max-height: 50px; /* Adjust the height of the logo */
+  vertical-align: middle;
+}
+
+
+
+
+nav ul.menu {
+  display: flex;
+  gap: 20px;
+}
+
+nav ul.menu li {
+  font-size: 16px; /* Adjust the font size for the menu items */
+}
+
+nav ul.menu li a {
+  text-decoration: none;
+  color: #000000;
+  transition: color 0.3s ease;
+}
+
+nav ul.menu li a:hover {
+  color:  rgb(255, 255, 255); /* Color for the menu items on hover */
+}
+
+
+
+
+.backbtn {
+  background-color: white;
+  border: none;
+  color: black;
+  padding: 10px 32px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.backbtn:hover {
+  background-color: #5a5959;
+  color: white;
+}
+
+a{
+  text-decoration: none;
+}
+
+.backbtn:hover a{
+  color: white;
+}
+
+.backbtn a{
+  color: black;
+}
+
+
+
+
+
+.statusbtn{
+  justify-content: space-evenly;
+  display: flex;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
