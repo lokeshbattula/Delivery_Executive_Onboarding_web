@@ -25,29 +25,6 @@ const adminpassword2 = process.env.ap2;
 
 const {User , ImageModel, Admin} = require("./models");
 
-// const adminlog = new Admin({
-//     adminphone: adminnum2,
-//     approval:[],
-// });
-
-// adminlog.save();
-// console.log(adminlog);
-
-//storage
-const Storage = multer.diskStorage({
-    destination: (req, file, cb)=> {
-        cb(null, 'uploads');
-    },
-    filename: (req, file, cb) => {
-        var ext = file.originalname.substring(file.originalname.lastIndexOf('.'));
-        cb(null, file.fieldname + '-' + Date.now() + ext);
-    }
-});
-
-const store = multer({
-    storage: Storage
-});
-
 
 app.use(express.static("public"));
 app.use(bodyParser.json());
@@ -62,6 +39,23 @@ app.use(fileupload({
     useTempFiles: true,
     tempFileDir: "/tmp",
 }));
+
+const Storage = multer.diskStorage({
+    destination: (req, file, cb)=> {
+        cb(null, 'tempFileDir');
+    },
+    filename: (req, file, cb) => {
+        var ext = file.originalname.substring(file.originalname.lastIndexOf('.'));
+        cb(null, file.fieldname + '-' + Date.now() + ext);
+    }
+});
+
+const store = multer({
+    storage: Storage
+});
+
+
+
 
 
 
