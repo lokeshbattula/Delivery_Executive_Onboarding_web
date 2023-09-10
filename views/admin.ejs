@@ -96,7 +96,11 @@
                                 <% const userphone = userdata[i].phone %>
                                 <% const temp = true %>
                                 <div >
+                                    <% if(userdata[i].status === "Not Registered") {%>
+                                        <%= userdata[i].phone %>
+                                    <% } else { %>
                                 <a href="/register?userphone=<%= userphone %>&&admin=<%= temp %>"><%= userdata[i].phone %></a>
+                                <% } %>
                                 </div>
                                 
                             </td>
