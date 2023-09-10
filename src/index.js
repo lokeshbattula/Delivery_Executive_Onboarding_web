@@ -6,6 +6,7 @@ const multer = require("multer");
 const sharp = require('sharp');
 const fs = require("fs");
 const cookieParser = require('cookie-parser');
+const fileupload = require('express-fileupload');
 
 dotenv.config();
 
@@ -57,6 +58,10 @@ app.use(session({
     saveUninitialized: true,
 }));
 app.use(cookieParser());
+app.use(fileupload({
+    useTempFiles: true,
+    tempFileDir: "/tmp",
+}));
 
 
 
