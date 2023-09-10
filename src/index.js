@@ -42,7 +42,7 @@ app.use(fileupload({
 
 const Storage = multer.diskStorage({
     destination: (req, file, cb)=> {
-        cb(null, 'tempFileDir');
+        cb(null, '/temp');
     },
     filename: (req, file, cb) => {
         var ext = file.originalname.substring(file.originalname.lastIndexOf('.'));
