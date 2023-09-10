@@ -4,9 +4,10 @@ const dotenv = require("dotenv");
 const session = require('express-session');
 const multer = require("multer");
 const sharp = require('sharp');
-const fs = require("fs");
+// const fs = require("fs");
 const cookieParser = require('cookie-parser');
-const fileupload = require('express-fileupload');
+// const AWS = require('aws-sdk');
+// const fileupload = require('express-fileupload');
 
 dotenv.config();
 
@@ -35,20 +36,20 @@ app.use(session({
     saveUninitialized: true,
 }));
 app.use(cookieParser());
-app.use(fileupload({
-    useTempFiles: true,
-    tempFileDir: "/tmp",
-}));
 
-const Storage = multer.diskStorage({
-    destination: (req, file, cb)=> {
-        cb(null, '/temp');
-    },
-    filename: (req, file, cb) => {
-        var ext = file.originalname.substring(file.originalname.lastIndexOf('.'));
-        cb(null, file.fieldname + '-' + Date.now() + ext);
-    }
-});
+
+
+// const Storage = multer.diskStorage({
+//     destination: (req, file, cb)=> {
+//         cb(null, 'uploads');
+//     },
+//     filename: (req, file, cb) => {
+//         var ext = file.originalname.substring(file.originalname.lastIndexOf('.'));
+//         cb(null, file.fieldname + '-' + Date.now() + ext);
+//     }
+// });
+
+const Storage = multer.memoryStorage();
 
 const store = multer({
     storage: Storage
@@ -130,6 +131,7 @@ app.post("/login", async (req, res)=> {
                 if(registered == true){
                     const {fullname, dob, address, pincode,accnum,bankname,branchname,ifsc,dl,bikenum,pannum} = userlogin;
                     const all_images = await ImageModel.find({phone:phone});
+                    console.log(all_images);
                     res.render("register.ejs", {phone,status,admin,registered,fullname, dob, address, pincode,accnum,bankname,branchname,ifsc,dl,bikenum,pannum,all_images});
                 }
                 else{
@@ -150,9 +152,133 @@ app.post("/login", async (req, res)=> {
     }
 });
 
-app.post("/register",store.array('img',4), async (req , res)=>{
+// app.post("/register",store.array('img',4), async (req , res)=>{
+//     const admin = req.query.admin;
+//     // Getting Current date and time 
+//     const date = new Date();
+//     const year = date.getFullYear();
+//     const month = date.getMonth();
+//     const dat = date.getDate();
+//     const hour = date.getHours();
+//     const min = date.getMinutes();
+//     const seconds = date.getSeconds();
+//     const datetime = `${month}/${dat}/${year}  ${hour}:${min}:${seconds}`;
+//     console.log(datetime);
+
+//     const userphone = req.cookies.phone;
+//     const userpassword = req.cookies.password;
+//     const checkpassword = await User.findOne({phone:userphone});
+//     if(userpassword === checkpassword.password){
+//         console.log("checked password sucessfully");
+//         var phone = userphone;
+//     }
+//     console.log("phone jdkjd:",phone);
+    
+//     const registereduser = await User.findOne({phone:phone});
+    
+//     const reg = registereduser.registered;
+    
+//     if(reg){
+//         console.log("getting in if");
+//         const registered = reg;
+//         console.log("getting into if loop");
+//         const status = registereduser.status;
+//         const {fullname, dob, address, pincode,accnum,bankname,branchname,ifsc,dl,bikenum,pannum} = registereduser;
+//         const all_images = await ImageModel.find({phone:phone});
+//         res.render("register.ejs",{phone,admin,status,registered,fullname, dob, address, pincode,accnum,bankname,branchname,ifsc,dl,bikenum,pannum,all_images});      
+//     }
+//     else{
+        
+//         const birthdate = new Date(req.body.dob );
+//         const today = new Date();
+//         const age = today.getFullYear() - birthdate.getFullYear();
+        
+//         // Check if the user is 18 years or older
+        
+//         if (age < 18) {
+//             return res.status(400).send('You must be 18 years or older to proceed.');
+//         }
+        
+        
+//         await User.updateOne({phone},{$set: {registered:true,status:"Pending",registeredtime:datetime}});
+//         const userlogin = await User.findOne({phone});
+//         console.log("checking");
+//         const registered = userlogin.registered; 
+//         const status = userlogin.status;
+
+    
+//     //Image Upload
+
+//     // console.log(userlogin);
+    
+//     const {fullname, dob, address, pincode,accnum,bankname,branchname,ifsc,dl,bikenum,pannum} = req.body;
+    
+//     try{
+//         const files = req.files;
+
+//     try {
+//         const imgArray = await Promise.all(files.map(async (file) => {
+//             const buffer = await sharp(file.path)
+//                 .resize({ width: 600, height: 300 ,fit:'inside'}) // Adjust the dimensions as needed
+//                 .toBuffer();
+            
+//             const imageBase64 = buffer.toString('base64');
+            
+//             return {
+//                 phone: phone,
+//                 filename: file.originalname,
+//                 contentType: file.mimetype,
+//                 imageBase64,
+//             };
+//         }));
+
+//         const result = await Promise.all(imgArray.map(async (imageData) => {
+//             const newUpload = new ImageModel(imageData);
+
+//             try {
+//                 await newUpload.save();
+//                 return { msg: "Images Uploaded Successfully" };
+//             } catch (error) {
+//                 if (error.name === 'MongoError' && error.code === 11000) {
+//                     return Promise.reject({ error: `Duplicate files` });
+//                 }
+//                 return Promise.reject({ error: error.message || "Cannot Upload" });
+//             }
+//         }));
+
+        
+//     } catch (err) {
+//         console.error(err);
+//     }
+       
+//         await User.updateMany({phone},
+//             {accnum:accnum,
+//                 fullname:fullname,
+//                 dob:dob,
+//                 address:address,
+//                 pincode:pincode,
+//                 bankname:bankname,
+//                 branchname:branchname,
+//                 ifsc:ifsc,
+//                 dl:dl,
+//                 bikenum:bikenum,
+//                 pannum:pannum,
+//                 },
+//             );
+//         const upuserlogin = await User.findOne({phone:phone});
+//         // console.log(upuserlogin);
+//         const all_images = await ImageModel.find({phone:phone});
+        
+//         res.render("register.ejs",{registered,status,admin,fullname, dob, address, pincode,accnum,bankname,branchname,ifsc,dl,bikenum,pannum,all_images});
+//     }
+//     catch(err){
+//         console.error("getting error", err);
+//     }
+// }
+// });
+
+app.post("/register", store.array('img', 4), async (req, res) => {
     const admin = req.query.admin;
-    // Getting Current date and time 
     const date = new Date();
     const year = date.getFullYear();
     const month = date.getMonth();
@@ -161,119 +287,102 @@ app.post("/register",store.array('img',4), async (req , res)=>{
     const min = date.getMinutes();
     const seconds = date.getSeconds();
     const datetime = `${month}/${dat}/${year}  ${hour}:${min}:${seconds}`;
-    console.log(datetime);
 
     const userphone = req.cookies.phone;
     const userpassword = req.cookies.password;
-    const checkpassword = await User.findOne({phone:userphone});
-    if(userpassword === checkpassword.password){
-        console.log("checked password sucessfully");
-        var phone = userphone;
-    }
-    console.log("phone jdkjd:",phone);
-    
-    const registereduser = await User.findOne({phone:phone});
-    
-    const reg = registereduser.registered;
-    
-    if(reg){
-        console.log("getting in if");
-        const registered = reg;
-        console.log("getting into if loop");
-        const status = registereduser.status;
-        const {fullname, dob, address, pincode,accnum,bankname,branchname,ifsc,dl,bikenum,pannum} = registereduser;
-        const all_images = await ImageModel.find({phone:phone});
-        res.render("register.ejs",{phone,admin,status,registered,fullname, dob, address, pincode,accnum,bankname,branchname,ifsc,dl,bikenum,pannum,all_images});      
-    }
-    else{
-        
-        const birthdate = new Date(req.body.dob );
-        const today = new Date();
-        const age = today.getFullYear() - birthdate.getFullYear();
-        
-        // Check if the user is 18 years or older
-        
-        if (age < 18) {
-            return res.status(400).send('You must be 18 years or older to proceed.');
-        }
-        
-        
-        await User.updateOne({phone},{$set: {registered:true,status:"Pending",registeredtime:datetime}});
-        const userlogin = await User.findOne({phone});
-        console.log("checking");
-        const registered = userlogin.registered; 
-        const status = userlogin.status;
-
-    
-    //Image Upload
-
-    // console.log(userlogin);
-    
-    const {fullname, dob, address, pincode,accnum,bankname,branchname,ifsc,dl,bikenum,pannum} = req.body;
-    
-    try{
-        const files = req.files;
 
     try {
-        const imgArray = await Promise.all(files.map(async (file) => {
-            const buffer = await sharp(file.path)
-                .resize({ width: 600, height: 300 ,fit:'inside'}) // Adjust the dimensions as needed
-                .toBuffer();
-            
-            const imageBase64 = buffer.toString('base64');
-            
-            return {
-                phone: phone,
-                filename: file.originalname,
-                contentType: file.mimetype,
-                imageBase64,
-            };
-        }));
+        const checkpassword = await User.findOne({ phone: userphone });
+        if (userpassword === checkpassword.password) {
+            var phone = userphone;
+        }
 
-        const result = await Promise.all(imgArray.map(async (imageData) => {
-            const newUpload = new ImageModel(imageData);
+        const registereduser = await User.findOne({ phone: phone });
+        const reg = registereduser.registered;
+
+        if (reg) {
+            const registered = reg;
+            const status = registereduser.status;
+            const { fullname, dob, address, pincode, accnum, bankname, branchname, ifsc, dl, bikenum, pannum } = registereduser;
+            const all_images = await ImageModel.find({ phone: phone });
+            res.render("register.ejs", { phone, admin, status, registered, fullname, dob, address, pincode, accnum, bankname, branchname, ifsc, dl, bikenum, pannum, all_images });
+        } else {
+            const birthdate = new Date(req.body.dob);
+            const today = new Date();
+            const age = today.getFullYear() - birthdate.getFullYear();
+
+            if (age < 18) {
+                return res.status(400).send('You must be 18 years or older to proceed.');
+            }
+
+            await User.updateOne({ phone }, { $set: { registered: true, status: "Pending", registeredtime: datetime } });
+            const userlogin = await User.findOne({ phone });
+            const registered = userlogin.registered;
+            const status = userlogin.status;
+
+            const { fullname, dob, address, pincode, accnum, bankname, branchname, ifsc, dl, bikenum, pannum } = req.body;
+
+            const files = req.files;
+            const imageArray = [];
 
             try {
-                await newUpload.save();
-                return { msg: "Images Uploaded Successfully" };
-            } catch (error) {
-                if (error.name === 'MongoError' && error.code === 11000) {
-                    return Promise.reject({ error: `Duplicate files` });
-                }
-                return Promise.reject({ error: error.message || "Cannot Upload" });
-            }
-        }));
+                for (const file of files) {
+                    const buffer = await sharp(file.buffer)
+                        .resize({ width: 600, height: 300, fit: 'inside' })
+                        .toBuffer();
 
-        
+                    const imageBase64 = buffer.toString('base64');
+
+                    imageArray.push({
+                        phone: userphone,
+                        filename: file.originalname,
+                        contentType: file.mimetype,
+                        imageBase64: imageBase64,
+                    });
+                }
+
+                // Save the image data in MongoDB
+                // const result = 
+                const result = await ImageModel.insertMany(imageArray);
+                console.log(result);
+
+                // Get the inserted image IDs
+                // const imageIds = result.map((image) => image._id);
+
+                // Update the user document to include the image IDs
+                // await User.updateOne({ phone }, { imageIds });
+
+            } catch (err) {
+                console.error(err);
+            }
+
+            await User.updateMany({ phone }, {
+                accnum: accnum,
+                fullname: fullname,
+                dob: dob,
+                address: address,
+                pincode: pincode,
+                bankname: bankname,
+                branchname: branchname,
+                ifsc: ifsc,
+                dl: dl,
+                bikenum: bikenum,
+                pannum: pannum,
+            });
+
+            const upuserlogin = await User.findOne({ phone });
+            const all_images = await ImageModel.find({ phone: phone });
+            console.log(all_images);
+            res.render("register.ejs", { registered, status, admin, fullname, dob, address, pincode, accnum, bankname, branchname, ifsc, dl, bikenum, pannum, all_images });
+        }
     } catch (err) {
-        console.error(err);
+        console.error("Error during registration:", err);
+        // Handle errors appropriately
+        res.status(500).send('Error during registration');
     }
-       
-        await User.updateMany({phone},
-            {accnum:accnum,
-                fullname:fullname,
-                dob:dob,
-                address:address,
-                pincode:pincode,
-                bankname:bankname,
-                branchname:branchname,
-                ifsc:ifsc,
-                dl:dl,
-                bikenum:bikenum,
-                pannum:pannum,
-                },
-            );
-        const upuserlogin = await User.findOne({phone:phone});
-        // console.log(upuserlogin);
-        const all_images = await ImageModel.find({phone:phone});
-        
-        res.render("register.ejs",{registered,status,admin,fullname, dob, address, pincode,accnum,bankname,branchname,ifsc,dl,bikenum,pannum,all_images});
-    }
-    catch(err){
-        console.error("getting error", err);
-    }
-}
 });
+
+  
 
 app.get("/admin", async (req,res)=>{
     const phone = req.cookies.phone;
