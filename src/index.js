@@ -307,13 +307,6 @@ app.post("/register", store.array('img', 4), async (req, res) => {
             const all_images = await ImageModel.find({ phone: phone });
             res.render("register.ejs", { phone, admin, status, registered, fullname, dob, address, pincode, accnum, bankname, branchname, ifsc, dl, bikenum, pannum, all_images });
         } else {
-            const birthdate = new Date(req.body.dob);
-            const today = new Date();
-            const age = today.getFullYear() - birthdate.getFullYear();
-
-            if (age < 18) {
-                return res.status(400).send('You must be 18 years or older to proceed.');
-            }
 
             await User.updateOne({ phone }, { $set: { registered: true, status: "Pending", registeredtime: datetime } });
             const userlogin = await User.findOne({ phone });
@@ -372,7 +365,7 @@ app.post("/register", store.array('img', 4), async (req, res) => {
 
             const upuserlogin = await User.findOne({ phone });
             const all_images = await ImageModel.find({ phone: phone });
-            console.log(all_images);
+            // console.log(all_images);
             res.render("register.ejs", { registered, status, admin, fullname, dob, address, pincode, accnum, bankname, branchname, ifsc, dl, bikenum, pannum, all_images });
         }
     } catch (err) {
@@ -424,12 +417,12 @@ app.get("/", (req,res)=>{
 });
 
 // testing
-app.get("/test", async (req,res)=>{
-    res.render("test.ejs");
-});
-app.post("/upload", (req,res)=>{
-    res.send(req.body);
-});
+// app.get("/test", async (req,res)=>{
+//     res.render("test.ejs");
+// });
+// app.post("/upload", (req,res)=>{
+//     res.send(req.body);
+// });
 //testing end
 
 

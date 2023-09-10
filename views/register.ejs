@@ -65,8 +65,17 @@
                 <!----- Date Of Birth -------------------------------------------------------->
                 <tr>
                     <td>DATE OF BIRTH</td>
+                    <% const date = new Date(); %>
+                    <% const year = date.getFullYear() - 18; %>
+                    <% const month = date.getMonth() + 1; %> 
+                    <% const dat = date.getDate(); %> 
+                    <% const datetime = `${year}-${month < 10 ? '0' : ''}${month}-${dat < 10 ? '0' : ''}${dat}`; %>
+                    
+                    <td><input type="date" name="dob" max="<%= datetime %>" required>
 
-                    <td><input type="date" name="dob" required></td>
+                        (Age should be above 18 years)
+                       
+                    </td>
 
                     <!----- Email Id ---------------------------------------------------------->
                 <tr>
@@ -123,8 +132,9 @@ Female <input type="radio" name="Gender" value="Female" />
                 <tr>
                     <td>ACCOUNT NUMBER</td>
                     <td><input type="text" name="accnum" maxlength="18" minlength="5" placeholder="Account Number" required/></td>
+                
                     <td>UPLOAD PASSBOOK(*img)</td>
-                    <td><input type="file" placeholder="passbook" name="img"></td>
+                    <td><input type="file" placeholder="passbook" name="img" required></td>
                 </tr>
                 <tr>
                     <td>BANK NAME</td>
@@ -137,6 +147,7 @@ Female <input type="radio" name="Gender" value="Female" />
                 <tr>
                     <td>IFSC CODE</td>
                     <td><input type="text" name="ifsc" placeholder="IFSC Code" maxlength="11" minlength="11" required/>
+                        (11 digit number)
                     </td>
                 </tr>
 
@@ -150,8 +161,8 @@ Female <input type="radio" name="Gender" value="Female" />
                 <tr>
                     <td>DRIVING LICIENSE</td>
                     <td><input type="text" name="dl" placeholder="DL Number" maxlength="16" required></td>
-                    <td>RC FILE</td>
-                    <td><input type="file" name="img" placeholder="Upload RC"></td>
+                    <td>UPLOAD RC FILE(*img)</td>
+                    <td><input type="file" name="img" placeholder="Upload RC" required></td>
                 </tr>
                 <tr>
                     <td>BIKE NUMBER</td>
@@ -160,8 +171,8 @@ Female <input type="radio" name="Gender" value="Female" />
                 <tr>
                     <td>PAN CARD NUMBER</td>
                     <td><input type="text" name="pannum" placeholder="Pan Card Number" maxlength="10" minlength="10" required/></td>
-                    <td>UPLOAD PAN CARD</td>
-                    <td><input type="file" name="img" placeholder="Upload Pan Card"></td>
+                    <td>UPLOAD PAN CARD(*img)</td>
+                    <td><input type="file" name="img" placeholder="Upload Pan Card" required></td>
                 </tr>
                 <tr>
                     <td colspan="4">
@@ -274,9 +285,10 @@ Female <input type="radio" name="Gender" value="Female" />
                     <div>
                         <h2>Status : <%= status %></h2>
                     </div>
+
                 </tr>
                 <tr>
-                    <% if(admin){ %>>
+                    <% if(admin){ %>
                         <td>
                             <div class="statusbtn">
                                     <button class="backbtn"><a href="/register?admin=<%= admin %>&&status=Approved&&userphone=<%= userphone %>">APPROVE</a></button>
