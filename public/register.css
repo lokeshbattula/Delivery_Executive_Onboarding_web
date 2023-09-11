@@ -3,17 +3,18 @@ body{
   font-family: Arial, sans-serif;
 }
 
+
 h2{
      
-    font-size: 25pt;         
-    font-style: normal; 
-    font-weight: bold; 
+    font-size: 25pt;        
+    font-style: normal;
+    font-weight: bold;
     color:SlateBlue;
-    text-align: center; 
+    text-align: center;
     text-decoration: underline
   }
-  
-  
+ 
+ 
   .regbtn {
     display: block;
     width: 100%;
@@ -32,9 +33,13 @@ h2{
   }
 
 
+
+
   .regbtn:hover {
     background-color: #333; /* Button background color on hover */
   }
+
+
 
 
 table {
@@ -45,11 +50,15 @@ table {
     background-color: white; /* Table background color */
 }
 
+
 th, td {
     padding: 10px;
-    
+   
     text-align: left;
 }
+
+
+
 
 
 
@@ -57,28 +66,34 @@ td {
     border-bottom: 1px solid #ddd  ;
 }
 
+
 h1, h3 {
     margin: 0;
 }
+
 
 .h{
   background-color: gray;
 }
 
+
 .d{
   background-color: white;
 }
 
+
 td h1 {
     font-size: 24px;
-    
-    
+   
+   
 }
+
 
 td h3 {
     font-size: 18px;
-    
+   
 }
+
 
 body, ul {
   margin: 0;
@@ -86,11 +101,13 @@ body, ul {
   list-style: none;
 }
 
+
 header {
   background-color: #5a5959; /* Background color for the header */
   color: #fff; /* Text color for the header */
   padding: 10px 0;
 }
+
 
 .header-container {
   display: flex;
@@ -102,10 +119,15 @@ header {
   margin-top: 30px;
 }
 
+
 .logo img {
   max-height: 50px; /* Adjust the height of the logo */
   vertical-align: middle;
 }
+
+
+
+
 
 
 
@@ -115,9 +137,11 @@ nav ul.menu {
   gap: 20px;
 }
 
+
 nav ul.menu li {
   font-size: 16px; /* Adjust the font size for the menu items */
 }
+
 
 nav ul.menu li a {
   text-decoration: none;
@@ -125,14 +149,12 @@ nav ul.menu li a {
   transition: color 0.3s ease;
 }
 
+/* 
 nav ul.menu li a:hover {
-  color:  rgb(255, 255, 255); /* Color for the menu items on hover */
-}
+  color:  rgb(255, 255, 255); 
+} */
 
-
-
-
-.backbtn {
+#log{
   background-color: white;
   border: none;
   color: black;
@@ -143,26 +165,47 @@ nav ul.menu li a:hover {
   transition: 0.3s;
   cursor: pointer;
 }
-
-.backbtn:hover {
+#log:hover {
   background-color: #5a5959;
   color: white;
 }
+#log:hover a{
+  
+  color: white;
+}
+
+.backbtn {
+  background-color: #5a5959;
+  border: none;
+  color: white;
+  padding: 10px 32px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+
+.backbtn:hover {
+  background-color: white;
+  color: #5a5959;
+}
+
 
 a{
   text-decoration: none;
 }
 
-.backbtn:hover a{
-  color: white;
-}
 
-.backbtn a{
+.backbtn:hover a{
   color: black;
 }
 
 
-
+.backbtn a{
+  color: white;
+}
 
 
 .statusbtn{
@@ -172,4 +215,25 @@ a{
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
+}
+
+@media (max-width: 767px) {
+  .header-container {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .logo {
+      margin-bottom: 20px;
+  }
+
+  nav ul.menu {
+      flex-direction: column;
+  }
+  
+  .backbtn {
+      width: auto;
+      padding: 10px 20px;
+      text-align: center;
+  }
 }
