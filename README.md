@@ -65,9 +65,11 @@ Database (MongoDB):
   I have created user collection to store user details like (full name, email, address, Pincode, bank details, driver's license, PAN number, and Registered time(time at which the user registered)).
   
 Here the phone is unique for every document in the collection.
+
 Images Collection:
 
  I have stored the image data in the images collection along with the phone of the user by converting them into base64.
+ 
 Admin Collection:
 
  I've set up an 'Admin' collection to manage administrative tasks. Within this collection, I store the records of approvals granted by admins. Instead of using a nested array, I've structured this data more neatly. For each admin, I keep track of their phone number and create an 'approvals' array. Inside this array, I store objects that represent each approval. Each of these approval objects contains the user's phone number and the timestamp when the approval was granted 
